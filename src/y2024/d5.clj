@@ -40,15 +40,13 @@
     (nth update index)))
 
 (defn fix-update [rules update]
-  (loop [front [] back update]
-    (if-let [head (first back)]
-      (if-let [rule (rules head)]
-        (let [errors (set/intersection (set front) rule)]
-          (if (empty? errors)
-            (recur (conj front head) (rest back))
-            (recur [] (concat (remove errors front) [head] errors (rest back)))))
-        (recur (conj front head) (rest back)))
-      front)))
+  (let [comparator (fn [a b]
+                     (if-let [rule (get rules b)]
+                       (if (rule a)
+                         -1
+                         0)
+                       0))]
+    (sort-by identity comparator update)))
 
 ;; Entry Points
 
