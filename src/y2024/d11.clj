@@ -18,13 +18,13 @@
         half (/ len 2)
         first-half (subs digits 0 half)
         second-half (subs digits half len)]
-    [(Integer/parseInt first-half) (Integer/parseInt second-half)]))
+    [(parse-long first-half) (parse-long second-half)]))
 
 (defn evolve [stone]
   (cond
     (zero? stone) [1]
     (even? (count-digits stone)) (split-number stone)
-    :else [(*' 2024 stone)]))
+    :else [(* 2024 stone)]))
 
 (let [cache (atom {})]
   (defn blink [stone blinks]
