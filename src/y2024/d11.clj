@@ -26,21 +26,18 @@
     (even? (count-digits stone)) (split-number stone)
     :else [(*' 2024 stone)]))
 
-(defn blink [cache stone blinks]
-  (if-let [stones (get @cache [stone blinks])] 
-    stones
-    (if (zero? blinks)
-      1
-      (let [stones (evolve stone)
-                             stone-count (transduce (map #(blink cache % (dec blinks)))
-                                                    +
-                                                    stones)]
-                         (swap! cache assoc [stone blinks] stone-count)
-                         stone-count))))
-
-(defn count-stones [stone blinks]
-  (let [cache (atom {})]
-    (blink cache stone blinks)))
+(let [cache (atom {})]
+  (defn blink [stone blinks]
+    (if-let [stones (get @cache [stone blinks])] 
+      stones
+      (if (zero? blinks)
+        1
+        (let [stones (evolve stone)
+              stone-count (transduce (map #(blink % (dec blinks)))
+                                     +
+                                     stones)]
+          (swap! cache assoc [stone blinks] stone-count)
+          stone-count)))))
 
 ;; Entry Points
 
@@ -52,13 +49,13 @@
 (defn solve-part-1
   "The solution to part 1. Will be called with the result of the generator"
   [stones]
-  (transduce (map #(count-stones % 25))
+  (transduce (map #(blink % 25))
              +
              stones))
 
 (defn solve-part-2
   "The solution to part 2. Will be called with the result of the generator"
   [stones]
-  (transduce (map #(count-stones % 75))
+  (transduce (map #(blink % 75))
              +
              stones))
