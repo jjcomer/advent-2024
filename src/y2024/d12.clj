@@ -50,6 +50,7 @@
         ys (map second region)]
     [(apply min xs) (apply max xs) (apply min ys) (apply max ys)]))
 
+
 (defn find-perimeter2 [region]
   (let [[min-x max-x min-y max-y] (ranges region)
         tb (loop [xs (range min-x (inc max-x))
