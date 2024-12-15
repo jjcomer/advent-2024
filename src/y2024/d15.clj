@@ -107,7 +107,7 @@
                                  (recur (rest to-check) (conj spaces space)))
                                (recur (rest to-check) spaces)))
                            spaces))]
-            (if (every? (fn [[x y]] (= \. (get-in grid [x y]))) spaces)
+            (if (every? #(= \. (get-in grid %)) spaces)
               (let [boxes-to-push (sort-by 
                                    (if (= 0 (first move))
                                      (fn [box]
