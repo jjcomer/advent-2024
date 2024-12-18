@@ -1,5 +1,6 @@
 (ns y2024.d18
-  (:require [clojure.set :as set]))
+  (:require [clojure.set :as set]
+            [clojure.string :as str]))
 
 ;; PROBLEM LINK https://adventofcode.com/2024/day/18
 
@@ -42,9 +43,12 @@
 (defn solve-part-2
   "The solution to part 2. Will be called with the result of the generator"
   [bytes]
-  (let [first-bad (first (keep (fn [i]
-                                 (when (= -1 (shortest-path (gen-maze bytes i) [0 0] [70 70]))
-                                   i))
-                               (range 1024 (count bytes))))]
-    [first-bad (last (take first-bad bytes))]))
+  (loop [maze (gen-maze bytes 1024)
+         remaining-bytes (drop 1024 bytes)]
+    (if-let [byte (first remaining-bytes)]
+      (let [new-maze (disj maze byte)]
+        (if (pos? (shortest-path new-maze [0 0] [70 70]))
+          (recur new-maze (rest remaining-bytes))
+          (str/join "," byte)))
+      "No solution")))
 
