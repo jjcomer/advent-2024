@@ -1,9 +1,11 @@
 {:paths ["src"]
  :deps {aysylu/loom {:mvn/version "1.0.2"}
         org.clojure/math.numeric-tower {:mvn/version "0.0.5"}
+        org.clojure/math.combinatorics {:mvn/version "0.3.0"}
         org.clojure/data.priority-map {:mvn/version "1.2.0"}
         org.clojure/core.memoize {:mvn/version "1.1.266"}
         org.flatland/ordered {:mvn/version "1.15.12"} 
+        cheshire/cheshire {:mvn/version "6.1.0"}
         io.github.jjcomer/aoc-clj-elf {:mvn/version "0.1.2"}} 
  :tasks {:requires ([babashka.fs :as fs]
                     [aoc-clj-elf.core :as aoc])
