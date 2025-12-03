@@ -1,13 +1,7 @@
 (ns y2025.d3
-  (:require [clojure.test :as t :refer [deftest]]
-            [clojure.string :as str]))
+  (:require [clojure.string :as str]))
 
 ;; PROBLEM LINK https://adventofcode.com/2025/day/3
-
-(def t "987654321111111
-811111111111119
-234234234234278
-818181911112111")
 
 ;; Generator Logic
 
@@ -57,9 +51,3 @@
   "The solution to part 2. Will be called with the result of the generator"
   [input]
   (find-total-joltage 12 input))
-
-;; Tests
-;; Use tests to verify your solution. Consider using the sample data provided in the question
-
-(deftest sample-test
-  (t/is (= 2 (+ 1 1))))
