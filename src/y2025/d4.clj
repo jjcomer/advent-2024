@@ -1,20 +1,7 @@
 (ns y2025.d4
-  (:require [clojure.test :as t :refer [deftest]]
-            [clojure.string :as str]
-            [clojure.set :as set]))
+  (:require [clojure.string :as str]))
 
 ;; PROBLEM LINK https://adventofcode.com/2025/day/4
-
-(def t "..@@.@@@@.
-@@@.@.@.@@
-@@@@@.@.@@
-@.@@@@..@.
-@@.@@@@.@@
-.@@@@@@@.@
-.@.@.@.@@@
-@.@@@.@@@@
-.@@@@@@@@.
-@.@.@@@.@.")
 
 ;; Generator Logic
 
@@ -61,9 +48,3 @@
                            input
                            (range))]
     (- (count input) (count final-grid))))
-
-;; Tests
-;; Use tests to verify your solution. Consider using the sample data provided in the question
-
-(deftest sample-test
-  (t/is (= 2 (+ 1 1))))
