@@ -39,7 +39,7 @@
 (defn solve-part-1
   "The solution to part 1. Will be called with the result of the generator"
   [[ranges ingredients]]
-  (let [range-fns (generate-ranges ranges)]
+  (let [range-fns (generate-ranges (compress-ranges ranges))]
     (count (filter (apply some-fn range-fns) ingredients))))
 
 (defn solve-part-2
