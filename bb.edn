@@ -1,6 +1,6 @@
 {:paths ["src"]
  :deps {aysylu/loom {:mvn/version "1.0.2"}
-        org.clojure/math.numeric-tower {:mvn/version "0.0.5"}
+        org.clojure/math.numeric-tower {:mvn/version "0.1.0"}
         org.clojure/math.combinatorics {:mvn/version "0.3.0"}
         org.clojure/data.priority-map {:mvn/version "1.2.0"}
         org.clojure/core.memoize {:mvn/version "1.1.266"}
