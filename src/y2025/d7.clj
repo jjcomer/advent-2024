@@ -7,18 +7,17 @@
 
 ;; Solution Logic
 
-(let [cache (atom {})]
-  (defn find-timelines [grid r c]
-    (cond
-      (or (neg? c) (>= c (count (first grid)))) 0
-      (>= r (count grid)) 1
-      (@cache [r c]) (@cache [r c])
-      :else (let [timelines (if (= \^ (get-in grid [r c]))
-                              (+ (find-timelines grid (inc r) (inc c))
-                                 (find-timelines grid (inc r) (dec c)))
-                              (find-timelines grid (inc r) c))]
-              (swap! cache assoc [r c] timelines)
-              timelines))))
+(def find-timelines
+  (memoize
+   (fn [grid r c]
+     (cond
+       (or (neg? c) (>= c (count (first grid)))) 0
+       (>= r (count grid)) 1
+       :else (let [timelines (if (= \^ (get-in grid [r c]))
+                               (+ (find-timelines grid (inc r) (inc c))
+                                  (find-timelines grid (inc r) (dec c)))
+                               (find-timelines grid (inc r) c))]
+               timelines)))))
 
 ;; Entry Points
 
